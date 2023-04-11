@@ -1,0 +1,67 @@
+show databases;
+create database StudentData;
+use StudentData;
+create table StudentDetails(
+ID int,
+name varchar(100),
+address varchar(100)
+);
+desc StudentDetails;
+insert into StudentDetails values(1,"Aan","Pune");
+insert into StudentDetails values(2,"Nayan","Mumbai");
+insert into StudentDetails values(3,"Juan","Pune");
+insert into StudentDetails values(4,"Cuby","Delhi");
+insert into StudentDetails values(5,"Zeby","Banglore");
+show tables ;
+select * from StudentDetails;
+
+use StudentData;
+create table StudentMarks(
+ID int,
+name varchar(100),
+Marks int
+);
+desc StudentMarks;
+insert into StudentMarks values(1,"Aan",76);
+insert into StudentMarks values(2,"Nayan",77);
+insert into StudentMarks values(3,"Juan",58);
+insert into StudentMarks values(4,"Cuby",71);
+insert into StudentMarks values(5,"Zeby",71);
+show tables ;
+select * from StudentMarks;
+
+/*Creating view from a single table*/
+create view Detailsview as
+select name,address
+from StudentDetails
+where ID<5;
+select * from Detailsview;
+
+create view StudentName as
+select name
+from StudentDetails
+order by name;
+select * from StudentName;
+
+/*Creating views from multiple table*/
+create view MarksView as
+select StudentDetails.name, StudentMarks.Marks,StudentDetails.address
+from StudentDetails, StudentMarks
+where StudentDetails.name = StudentMarks.name;
+select * from MarksView;
+
+/*Deleting Views*/
+drop view StudentName;
+
+/* UPDATING VIEWS */
+/*add or remove views from a table*/
+create or replace view MarksView as
+select StudentDetails.name, StudentMarks.Marks,StudentDetails.address,StudentDetails.ID
+from StudentDetails, StudentMarks
+where StudentDetails.name = StudentMarks.name;
+select * from MarksView;
+
+/*inseritng row in table*/
+insert into MarksView(age)
+values(19,20,21,20,19);
+select * from MarksView;
