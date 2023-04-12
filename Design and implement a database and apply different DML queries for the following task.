@@ -1,0 +1,234 @@
+
+mysql> create database college;
+Query OK, 1 row affected (0.05 sec)
+
+mysql> use college;
+Database changed
+mysql> create table collegeData(ID int, Name varchar(30),Marks int, Rollnumber int, age int);
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> desc collegeData;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| ID         | int         | YES  |     | NULL    |       |
+| Name       | varchar(30) | YES  |     | NULL    |       |
+| Marks      | int         | YES  |     | NULL    |       |
+| Rollnumber | int         | YES  |     | NULL    |       |
+| age        | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into collegeData values(2210,"Nayan",67,31,19);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into collegeData values(2211,"Andrew",60,32,19);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into collegeData values(2212,"Frank",70,33,20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> insert into collegeData values(2213,"Portia",76,34,21);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select *from collegeData;
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2210 | Nayan  |    67 |         31 |   19 |
+| 2211 | Andrew |    60 |         32 |   19 |
+| 2212 | Frank  |    70 |         33 |   20 |
+| 2213 | Portia |    76 |         34 |   21 |
++------+--------+-------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql> desc collegeData;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| ID         | int         | YES  |     | NULL    |       |
+| Name       | varchar(30) | YES  |     | NULL    |       |
+| Marks      | int         | YES  |     | NULL    |       |
+| Rollnumber | int         | YES  |     | NULL    |       |
+| age        | int         | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into collegeData values(2213,"Bella",74,35,20);
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select *from collegeData;
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2210 | Nayan  |    67 |         31 |   19 |
+| 2211 | Andrew |    60 |         32 |   19 |
+| 2212 | Frank  |    70 |         33 |   20 |
+| 2213 | Portia |    76 |         34 |   21 |
+| 2213 | Bella  |    74 |         35 |   20 |
++------+--------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select ID,Name,Marks from collegeData;
++------+--------+-------+
+| ID   | Name   | Marks |
++------+--------+-------+
+| 2210 | Nayan  |    67 |
+| 2211 | Andrew |    60 |
+| 2212 | Frank  |    70 |
+| 2213 | Portia |    76 |
+| 2213 | Bella  |    74 |
++------+--------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select ID,Name,Marks from collegeData where marks>=70;
++------+--------+-------+
+| ID   | Name   | Marks |
++------+--------+-------+
+| 2212 | Frank  |    70 |
+| 2213 | Portia |    76 |
+| 2213 | Bella  |    74 |
++------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select ID,Name,Marks from collegeData where marks<=70;
++------+--------+-------+
+| ID   | Name   | Marks |
++------+--------+-------+
+| 2210 | Nayan  |    67 |
+| 2211 | Andrew |    60 |
+| 2212 | Frank  |    70 |
++------+--------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select *from collegeData;
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2210 | Nayan  |    67 |         31 |   19 |
+| 2211 | Andrew |    60 |         32 |   19 |
+| 2212 | Frank  |    70 |         33 |   20 |
+| 2213 | Portia |    76 |         34 |   21 |
+| 2213 | Bella  |    74 |         35 |   20 |
++------+--------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select distinct Name from collegeData;
++--------+
+| Name   |
++--------+
+| Nayan  |
+| Andrew |
+| Frank  |
+| Portia |
+| Bella  |
++--------+
+5 rows in set (0.01 sec)
+
+mysql> update collegeData set Marks=65 where ID=2211;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update collegeData set ID=2214 where Name="Bella";
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select *from collegeData;
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2210 | Nayan  |    67 |         31 |   19 |
+| 2211 | Andrew |    65 |         32 |   19 |
+| 2212 | Frank  |    70 |         33 |   20 |
+| 2213 | Portia |    76 |         34 |   21 |
+| 2214 | Bella  |    74 |         35 |   20 |
++------+--------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> delete from collegeData where ID=2213;
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select *from collegeData;
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2210 | Nayan  |    67 |         31 |   19 |
+| 2211 | Andrew |    65 |         32 |   19 |
+| 2212 | Frank  |    70 |         33 |   20 |
+| 2214 | Bella  |    74 |         35 |   20 |
++------+--------+-------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql> select *from collegeData where name like "%N";
++------+-------+-------+------------+------+
+| ID   | Name  | Marks | Rollnumber | age  |
++------+-------+-------+------------+------+
+| 2210 | Nayan |    67 |         31 |   19 |
++------+-------+-------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> select *from collegeData where name like "%a";
++------+-------+-------+------------+------+
+| ID   | Name  | Marks | Rollnumber | age  |
++------+-------+-------+------------+------+
+| 2214 | Bella |    74 |         35 |   20 |
++------+-------+-------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> select *from collegeData where name like "A%";
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2211 | Andrew |    65 |         32 |   19 |
++------+--------+-------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> select *from collegeData where name like "%n%";
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2210 | Nayan  |    67 |         31 |   19 |
+| 2211 | Andrew |    65 |         32 |   19 |
+| 2212 | Frank  |    70 |         33 |   20 |
++------+--------+-------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select *from collegeData where name="Nayan" AND Marks=67;
++------+-------+-------+------------+------+
+| ID   | Name  | Marks | Rollnumber | age  |
++------+-------+-------+------------+------+
+| 2210 | Nayan |    67 |         31 |   19 |
++------+-------+-------+------------+------+
+1 row in set (0.00 sec)
+
+mysql> select *from collegeData where name not like "%n";
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2211 | Andrew |    65 |         32 |   19 |
+| 2212 | Frank  |    70 |         33 |   20 |
+| 2214 | Bella  |    74 |         35 |   20 |
++------+--------+-------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select *from collegeData where name="Frank" or rollnumber=32;
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2211 | Andrew |    65 |         32 |   19 |
+| 2212 | Frank  |    70 |         33 |   20 |
++------+--------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select *from collegeData ;
++------+--------+-------+------------+------+
+| ID   | Name   | Marks | Rollnumber | age  |
++------+--------+-------+------------+------+
+| 2210 | Nayan  |    67 |         31 |   19 |
+| 2211 | Andrew |    65 |         32 |   19 |
+| 2212 | Frank  |    70 |         33 |   20 |
+| 2214 | Bella  |    74 |         35 |   20 |
++------+--------+-------+------------+------+
+4 rows in set (0.00 sec)
+
+mysql>
