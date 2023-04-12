@@ -1,0 +1,141 @@
+mysql> create database school;
+Query OK, 1 row affected (0.08 sec)
+
+mysql> use school;
+Database changed
+mysql> create table schooldata(name varchar(50),age int,ID int,address varchar(50));
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> desc schooldata;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(50) | YES  |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| ID      | int         | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.04 sec)
+
+mysql> insert into schooldata values("Nayan",21,234,"Pune");
+Query OK, 1 row affected (0.03 sec)
+
+mysql>  insert into schooldata values("Aanchal",20,237,"Pune");
+Query OK, 1 row affected (0.04 sec)
+
+mysql>  insert into schooldata values("Ron",20,235,"Moshi");
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into schooldata values("Shreya",21,231,"Mumbai");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from schooldata;
++---------+------+------+---------+
+| name    | age  | ID   | address |
++---------+------+------+---------+
+| Nayan   |   21 |  234 | Pune    |
+| Aanchal |   20 |  237 | Pune    |
+| Ron     |   20 |  235 | Moshi   |
+| Shreya  |   21 |  231 | Mumbai  |
++---------+------+------+---------+
+4 rows in set (0.00 sec)
+
+mysql> desc schooldata;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(50) | YES  |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| ID      | int         | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> truncate table schooldata;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> select * from schooldata;
+Empty set (0.00 sec)
+
+mysql> desc schooldata;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(50) | YES  |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| ID      | int         | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table schooldata add email varchar(50);
+Query OK, 0 rows affected (0.13 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc schooldata;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(50) | YES  |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| ID      | int         | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| email   | varchar(50) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> alter table schooldata modify email varchar(40);
+Query OK, 0 rows affected (0.16 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc schooldata;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| name    | varchar(50) | YES  |     | NULL    |       |
+| age     | int         | YES  |     | NULL    |       |
+| ID      | int         | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| email   | varchar(40) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>  insert into schooldata values("Shaurya",15,34,"Mumbai","Shaur@gmail.com");
+Query OK, 1 row affected (0.03 sec)
+
+mysql>  insert into schooldata values("Nayan",17,37,"Pune","Nayan@gmail.com");
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into schooldata values("Benjamin",17,39,"Pune","Ben@gmail.com");
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into schooldata values("Rachel",16,33,"Banglore","Rachel@gmail.com");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from schooldata;
++----------+------+------+----------+------------------+
+| name     | age  | ID   | address  | email            |
++----------+------+------+----------+------------------+
+| Shaurya  |   15 |   34 | Mumbai   | Shaur@gmail.com  |
+| Nayan    |   17 |   37 | Pune     | Nayan@gmail.com  |
+| Benjamin |   17 |   39 | Pune     | Ben@gmail.com    |
+| Rachel   |   16 |   33 | Banglore | Rachel@gmail.com |
++----------+------+------+----------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> alter table schooldata rename SchoolDatabase;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> select * from SchoolDatabase;
++----------+------+------+----------+------------------+
+| name     | age  | ID   | address  | email            |
++----------+------+------+----------+------------------+
+| Shaurya  |   15 |   34 | Mumbai   | Shaur@gmail.com  |
+| Nayan    |   17 |   37 | Pune     | Nayan@gmail.com  |
+| Benjamin |   17 |   39 | Pune     | Ben@gmail.com    |
+| Rachel   |   16 |   33 | Banglore | Rachel@gmail.com |
++----------+------+------+----------+------------------+
+4 rows in set (0.00 sec)
+
+mysql> drop table SchoolDatabase;
+Query OK, 0 rows affected (0.04 sec)
