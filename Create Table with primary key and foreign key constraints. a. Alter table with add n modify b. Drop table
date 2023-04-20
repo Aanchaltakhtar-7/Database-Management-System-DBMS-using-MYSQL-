@@ -1,0 +1,143 @@
+mysql> create database Office;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use Office;
+Database changed
+
+mysql> create table employee(ID int, name varchar(20), Address varchar(20),primary key(ID));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ID      | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| Address | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.01 sec)
+
+mysql> insert into employee values(123, "Nayan","Pune");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into employee values(143, "Kiara","Kolkata");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into employee values(133, "Aahan","Banglore");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into employee values(153, "Vhivan","Mumbai");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from employee;
++-----+--------+----------+
+| ID  | name   | Address  |
++-----+--------+----------+
+| 123 | Nayan  | Pune     |
+| 133 | Aahan  | Banglore |
+| 143 | Kiara  | Kolkata  |
+| 153 | Vhivan | Mumbai   |
++-----+--------+----------+
+4 rows in set (0.00 sec)
+
+mysql> create table canteen(Order_ID int, Order_name varchar(20), emp_ID int, primary key(Order_ID), foreign key(emp_ID) references employee(ID));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc canteen;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| Order_ID   | int         | NO   | PRI | NULL    |       |
+| Order_name | varchar(20) | YES  |     | NULL    |       |
+| emp_ID     | int         | YES  | MUL | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into canteen values(112, "Juice", 123);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into canteen values(113, "Dosa", 133);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into canteen values(114, "Coffee", 143);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into canteen values(115, "Noodles", 153);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from canteen;
++----------+------------+--------+
+| Order_ID | Order_name | emp_ID |
++----------+------------+--------+
+|      112 | Juice      |    123 |
+|      113 | Dosa       |    133 |
+|      114 | Coffee     |    143 |
+|      115 | Noodles    |    153 |
++----------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> alter table employee add email varchar(20);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ID      | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| Address | varchar(20) | YES  |     | NULL    |       |
+| email   | varchar(20) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table employee modify column email varchar(30);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc employee;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| ID      | int         | NO   | PRI | NULL    |       |
+| name    | varchar(20) | YES  |     | NULL    |       |
+| Address | varchar(20) | YES  |     | NULL    |       |
+| email   | varchar(30) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> create table office( office_ID int, department varchar(30), primary key(office_ID));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc office;
++------------+-------------+------+-----+---------+-------+
+| Field      | Type        | Null | Key | Default | Extra |
++------------+-------------+------+-----+---------+-------+
+| office_ID  | int         | NO   | PRI | NULL    |       |
+| department | varchar(30) | YES  |     | NULL    |       |
++------------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_office |
++------------------+
+| canteen          |
+| employee         |
+| office           |
++------------------+
+3 rows in set (0.00 sec)
+
+mysql> drop table office;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++------------------+
+| Tables_in_office |
++------------------+
+| canteen          |
+| employee         |
++------------------+
+2 rows in set (0.00 sec)
+
+mysql>
