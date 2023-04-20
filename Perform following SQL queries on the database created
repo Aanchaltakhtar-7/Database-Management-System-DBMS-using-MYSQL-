@@ -1,0 +1,404 @@
+mysql> create database student;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use student;
+Database changed
+mysql> create table studentData(ID int, Name varchar(20), age int, class varchar(20), Marks int);
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc studentData;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | int         | YES  |     | NULL    |       |
+| Name  | varchar(20) | YES  |     | NULL    |       |
+| age   | int         | YES  |     | NULL    |       |
+| class | varchar(20) | YES  |     | NULL    |       |
+| Marks | int         | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into studentData values(1,"Cyan",15,"9th",98);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into studentData values(2,"Jimmy",15,"9th",81);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into studentData values(3,"Miya",15,"9th",71);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into studentData values(4,"Ability",16,"9th",81);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into studentData values(11,"Hayden",16,"10th",91);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into studentData values(12,"James",16,"10th",61);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into studentData values(13,"Neo",16,"10th",78);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from studentData;
++------+---------+------+-------+-------+
+| ID   | Name    | age  | class | Marks |
++------+---------+------+-------+-------+
+|    1 | Cyan    |   15 | 9th   |    98 |
+|    2 | Jimmy   |   15 | 9th   |    81 |
+|    3 | Miya    |   15 | 9th   |    71 |
+|    4 | Ability |   16 | 9th   |    81 |
+|   11 | Hayden  |   16 | 10th  |    91 |
+|   12 | James   |   16 | 10th  |    61 |
+|   13 | Neo     |   16 | 10th  |    78 |
++------+---------+------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select* from studentData where id= 1;
++------+------+------+-------+-------+
+| ID   | Name | age  | class | Marks |
++------+------+------+-------+-------+
+|    1 | Cyan |   15 | 9th   |    98 |
++------+------+------+-------+-------+
+1 row in set (0.00 sec)
+
+mysql> select* from studentData where id != 1;
++------+---------+------+-------+-------+
+| ID   | Name    | age  | class | Marks |
++------+---------+------+-------+-------+
+|    2 | Jimmy   |   15 | 9th   |    81 |
+|    3 | Miya    |   15 | 9th   |    71 |
+|    4 | Ability |   16 | 9th   |    81 |
+|   11 | Hayden  |   16 | 10th  |    91 |
+|   12 | James   |   16 | 10th  |    61 |
+|   13 | Neo     |   16 | 10th  |    78 |
++------+---------+------+-------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select* from studentData where id <= 3;
++------+-------+------+-------+-------+
+| ID   | Name  | age  | class | Marks |
++------+-------+------+-------+-------+
+|    1 | Cyan  |   15 | 9th   |    98 |
+|    2 | Jimmy |   15 | 9th   |    81 |
+|    3 | Miya  |   15 | 9th   |    71 |
++------+-------+------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select* from studentData where id > 3;
++------+---------+------+-------+-------+
+| ID   | Name    | age  | class | Marks |
++------+---------+------+-------+-------+
+|    4 | Ability |   16 | 9th   |    81 |
+|   11 | Hayden  |   16 | 10th  |    91 |
+|   12 | James   |   16 | 10th  |    61 |
+|   13 | Neo     |   16 | 10th  |    78 |
++------+---------+------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select* from studentData where marks > 70;
++------+---------+------+-------+-------+
+| ID   | Name    | age  | class | Marks |
++------+---------+------+-------+-------+
+|    1 | Cyan    |   15 | 9th   |    98 |
+|    2 | Jimmy   |   15 | 9th   |    81 |
+|    3 | Miya    |   15 | 9th   |    71 |
+|    4 | Ability |   16 | 9th   |    81 |
+|   11 | Hayden  |   16 | 10th  |    91 |
+|   13 | Neo     |   16 | 10th  |    78 |
++------+---------+------+-------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select* from studentData where marks <=80 ;
++------+-------+------+-------+-------+
+| ID   | Name  | age  | class | Marks |
++------+-------+------+-------+-------+
+|    3 | Miya  |   15 | 9th   |    71 |
+|   12 | James |   16 | 10th  |    61 |
+|   13 | Neo   |   16 | 10th  |    78 |
++------+-------+------+-------+-------+
+3 rows in set (0.00 sec)
+
+mysql> select* from studentData where age =16 and marks <80 ;
++------+-------+------+-------+-------+
+| ID   | Name  | age  | class | Marks |
++------+-------+------+-------+-------+
+|   12 | James |   16 | 10th  |    61 |
+|   13 | Neo   |   16 | 10th  |    78 |
++------+-------+------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select* from studentData where ID IN(1,13);
++------+------+------+-------+-------+
+| ID   | Name | age  | class | Marks |
++------+------+------+-------+-------+
+|    1 | Cyan |   15 | 9th   |    98 |
+|   13 | Neo  |   16 | 10th  |    78 |
++------+------+------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select* from studentData where Name not like "%y";
++------+--------+------+-------+-------+
+| ID   | Name   | age  | class | Marks |
++------+--------+------+-------+-------+
+|    1 | Cyan   |   15 | 9th   |    98 |
+|    3 | Miya   |   15 | 9th   |    71 |
+|   11 | Hayden |   16 | 10th  |    91 |
+|   12 | James  |   16 | 10th  |    61 |
+|   13 | Neo    |   16 | 10th  |    78 |
++------+--------+------+-------+-------+
+5 rows in set (0.00 sec)
+
+mysql> select* from studentData where Name like "%y";
++------+---------+------+-------+-------+
+| ID   | Name    | age  | class | Marks |
++------+---------+------+-------+-------+
+|    2 | Jimmy   |   15 | 9th   |    81 |
+|    4 | Ability |   16 | 9th   |    81 |
++------+---------+------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select* from studentData where ID between 3 and 12;
++------+---------+------+-------+-------+
+| ID   | Name    | age  | class | Marks |
++------+---------+------+-------+-------+
+|    3 | Miya    |   15 | 9th   |    71 |
+|    4 | Ability |   16 | 9th   |    81 |
+|   11 | Hayden  |   16 | 10th  |    91 |
+|   12 | James   |   16 | 10th  |    61 |
++------+---------+------+-------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select ID,Name,age,class,Marks as "Marks + 20" from studentData;
++------+---------+------+-------+------------+
+| ID   | Name    | age  | class | Marks + 20 |
++------+---------+------+-------+------------+
+|    1 | Cyan    |   15 | 9th   |         98 |
+|    2 | Jimmy   |   15 | 9th   |         81 |
+|    3 | Miya    |   15 | 9th   |         71 |
+|    4 | Ability |   16 | 9th   |         81 |
+|   11 | Hayden  |   16 | 10th  |         91 |
+|   12 | James   |   16 | 10th  |         61 |
+|   13 | Neo     |   16 | 10th  |         78 |
++------+---------+------+-------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select ID,Name,age,class,Marks+20 as "Marks + 20" from studentData;
++------+---------+------+-------+------------+
+| ID   | Name    | age  | class | Marks + 20 |
++------+---------+------+-------+------------+
+|    1 | Cyan    |   15 | 9th   |        118 |
+|    2 | Jimmy   |   15 | 9th   |        101 |
+|    3 | Miya    |   15 | 9th   |         91 |
+|    4 | Ability |   16 | 9th   |        101 |
+|   11 | Hayden  |   16 | 10th  |        111 |
+|   12 | James   |   16 | 10th  |         81 |
+|   13 | Neo     |   16 | 10th  |         98 |
++------+---------+------+-------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select avg(Marks) as "avg" from studentData;
++---------+
+| avg     |
++---------+
+| 80.1429 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select sum(Marks) as "sum" from studentData;
++------+
+| sum  |
++------+
+|  561 |
++------+
+1 row in set (0.00 sec)
+
+mysql> select count(Marks) as "count" from studentData;
++-------+
+| count |
++-------+
+|     7 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select max(Marks) as "max_marks" from studentData;
++-----------+
+| max_marks |
++-----------+
+|        98 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select min(Marks) as "min_marks" from studentData;
++-----------+
+| min_marks |
++-----------+
+|        61 |
++-----------+
+1 row in set (0.00 sec)
+
+mysql> select round(avg(Marks),5) as "avg" from studentData;
++---------+
+| avg     |
++---------+
+| 80.1429 |
++---------+
+1 row in set (0.00 sec)
+
+mysql> select name, count(marks) as "count" from studentData group by name;
++---------+-------+
+| name    | count |
++---------+-------+
+| Cyan    |     1 |
+| Jimmy   |     1 |
+| Miya    |     1 |
+| Ability |     1 |
+| Hayden  |     1 |
+| James   |     1 |
+| Neo     |     1 |
++---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select* from studentData order by name ASC;
++------+---------+------+-------+-------+
+| ID   | Name    | age  | class | Marks |
++------+---------+------+-------+-------+
+|    4 | Ability |   16 | 9th   |    81 |
+|    1 | Cyan    |   15 | 9th   |    98 |
+|   11 | Hayden  |   16 | 10th  |    91 |
+|   12 | James   |   16 | 10th  |    61 |
+|    2 | Jimmy   |   15 | 9th   |    81 |
+|    3 | Miya    |   15 | 9th   |    71 |
+|   13 | Neo     |   16 | 10th  |    78 |
++------+---------+------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select* from studentData order by name DESC;
++------+---------+------+-------+-------+
+| ID   | Name    | age  | class | Marks |
++------+---------+------+-------+-------+
+|   13 | Neo     |   16 | 10th  |    78 |
+|    3 | Miya    |   15 | 9th   |    71 |
+|    2 | Jimmy   |   15 | 9th   |    81 |
+|   12 | James   |   16 | 10th  |    61 |
+|   11 | Hayden  |   16 | 10th  |    91 |
+|    1 | Cyan    |   15 | 9th   |    98 |
+|    4 | Ability |   16 | 9th   |    81 |
++------+---------+------+-------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select name, count(ID) as "count"from studentData group by name having count(ID)<10;
++---------+-------+
+| name    | count |
++---------+-------+
+| Cyan    |     1 |
+| Jimmy   |     1 |
+| Miya    |     1 |
+| Ability |     1 |
+| Hayden  |     1 |
+| James   |     1 |
+| Neo     |     1 |
++---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select name, count(ID) as "count"from studentData group by name having count(ID)<5;
++---------+-------+
+| name    | count |
++---------+-------+
+| Cyan    |     1 |
+| Jimmy   |     1 |
+| Miya    |     1 |
+| Ability |     1 |
+| Hayden  |     1 |
+| James   |     1 |
+| Neo     |     1 |
++---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select* from studentData limit 2;
++------+-------+------+-------+-------+
+| ID   | Name  | age  | class | Marks |
++------+-------+------+-------+-------+
+|    1 | Cyan  |   15 | 9th   |    98 |
+|    2 | Jimmy |   15 | 9th   |    81 |
++------+-------+------+-------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select curdate();
++------------+
+| curdate()  |
++------------+
+| 2023-04-21 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select current_time();
++----------------+
+| current_time() |
++----------------+
+| 00:21:00       |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> select adddate("2003-09-28",20);
++--------------------------+
+| adddate("2003-09-28",20) |
++--------------------------+
+| 2003-10-18               |
++--------------------------+
+1 row in set (0.00 sec)
+
+mysql> select date("2003-09-28 09:01:05");
++-----------------------------+
+| date("2003-09-28 09:01:05") |
++-----------------------------+
+| 2003-09-28                  |
++-----------------------------+
+1 row in set (0.00 sec)
+
+mysql> create table admin(a_ID int, a_name varchar(20));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into admin values(1,"Bella");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into admin values(2,"Damian");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from studentData join admin on studentData.ID= admin.a_ID;
++------+-------+------+-------+-------+------+--------+
+| ID   | Name  | age  | class | Marks | a_ID | a_name |
++------+-------+------+-------+-------+------+--------+
+|    1 | Cyan  |   15 | 9th   |    98 |    1 | Bella  |
+|    2 | Jimmy |   15 | 9th   |    81 |    2 | Damian |
++------+-------+------+-------+-------+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select student.s_id, student.s_name, student.s_branch, admin.a_id, ad
+    -> select student.s_id, student.s_name, student.s_branch, admin.a_id, a^Z^C
+mysql> select student.s_id, student.s_name, student.s_branch, admin.a_id, ad
+    -> insert into admin values(2,"Damian");^C
+mysql> select studentData.ID, studentData.Name, studentData.class, admin.a_ID, admin.a_name from studentData left join admin on studentData.ID= admin.a_ID;
++------+---------+-------+------+--------+
+| ID   | Name    | class | a_ID | a_name |
++------+---------+-------+------+--------+
+|    1 | Cyan    | 9th   |    1 | Bella  |
+|    2 | Jimmy   | 9th   |    2 | Damian |
+|    3 | Miya    | 9th   | NULL | NULL   |
+|    4 | Ability | 9th   | NULL | NULL   |
+|   11 | Hayden  | 10th  | NULL | NULL   |
+|   12 | James   | 10th  | NULL | NULL   |
+|   13 | Neo     | 10th  | NULL | NULL   |
++------+---------+-------+------+--------+
+7 rows in set (0.00 sec)
+
+mysql> select studentData.ID, studentData.Name, studentData.class, admin.a_ID,admin.a_name from studentData right join admin on studentData.ID= admin.a_ID;
++------+-------+-------+------+--------+
+| ID   | Name  | class | a_ID | a_name |
++------+-------+-------+------+--------+
+|    1 | Cyan  | 9th   |    1 | Bella  |
+|    2 | Jimmy | 9th   |    2 | Damian |
++------+-------+-------+------+--------+
+2 rows in set (0.00 sec)
+
+mysql> ^C
+mysql>
