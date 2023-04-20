@@ -1,0 +1,155 @@
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| library            |
+| mysql              |
+| performance_schema |
+| record             |
+| sakila             |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.01 sec)
+
+mysql> create database College;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use College;
+Database changed
+mysql>  create table data(id int, name varchar(20));
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> desc data;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | YES  |     | NULL    |       |
+| name  | varchar(20) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> alter table data add primary key(id);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> insert into data values(10, "Mack");
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into data values(20, "Liam");
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select * from data;
++----+------+
+| id | name |
++----+------+
+| 10 | Mack |
+| 20 | Liam |
++----+------+
+2 rows in set (0.00 sec)
+
+
+mysql> create table student(s_id int primary key, s_branch varchar(20), s_name varchar(20), s_age int );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> alter table student add ID int;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+
+mysql> alter table student add foreign key(ID) references data(id);
+Query OK, 0 rows affected (0.08 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc student;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| s_id     | int         | NO   | PRI | NULL    |       |
+| s_branch | varchar(20) | YES  |     | NULL    |       |
+| s_name   | varchar(20) | YES  |     | NULL    |       |
+| s_age    | int         | YES  |     | NULL    |       |
+| ID       | int         | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into student values(1123,"IT","Anu",19,10);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into student values(1124,"IT","Lily",19,20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(1125,"IT","Uvan",19,10);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into student values(1126,"IT","Jimmy",19,20);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from student;
++------+----------+--------+-------+------+
+| s_id | s_branch | s_name | s_age | ID   |
++------+----------+--------+-------+------+
+| 1123 | IT       | Anu    |    19 |   10 |
+| 1124 | IT       | Lily   |    19 |   20 |
+| 1125 | IT       | Uvan   |    19 |   10 |
+| 1126 | IT       | Jimmy  |    19 |   20 |
++------+----------+--------+-------+------+
+4 rows in set (0.00 sec)
+
+mysql> create table publisher(id int primary key, name varchar(20), p_year year);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc publisher;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| p_year | year        | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into publisher values(123,"Jade",2000),(124,"Mickey",2001),(125,"Nandy",2001);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select* from publisher;
++-----+--------+--------+
+| id  | name   | p_year |
++-----+--------+--------+
+| 123 | Jade   |   2000 |
+| 124 | Mickey |   2001 |
+| 125 | Nandy  |   2001 |
++-----+--------+--------+
+3 rows in set (0.00 sec)
+
+
+mysql> create table publisher(p_id int primary key, name varchar(20), p_year year);
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> desc publisher;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| p_id   | int         | NO   | PRI | NULL    |       |
+| name   | varchar(20) | YES  |     | NULL    |       |
+| p_year | year        | YES  |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into publisher values(123,"Jade",2000),(124,"Mickey",2001),(125,"Nandy",2001);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select* from publisher;
++------+--------+--------+
+| p_id | name   | p_year |
++------+--------+--------+
+|  123 | Jade   |   2000 |
+|  124 | Mickey |   2001 |
+|  125 | Nandy  |   2001 |
++------+--------+--------+
+3 rows in set (0.00 sec)
+
+
