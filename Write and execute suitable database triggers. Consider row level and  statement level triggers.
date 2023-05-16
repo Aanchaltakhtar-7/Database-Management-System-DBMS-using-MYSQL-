@@ -1,0 +1,198 @@
+mysql> create database office;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use office;
+Database changed
+mysql> create table emp(id int primary key, name varchar(15) not null, city varchar(15) not null, post varchar(15) not null, email varchar(30) not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc emp;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | int         | NO   | PRI | NULL    |       |
+| name  | varchar(15) | NO   |     | NULL    |       |
+| city  | varchar(15) | NO   |     | NULL    |       |
+| post  | varchar(15) | NO   |     | NULL    |       |
+| email | varchar(30) | NO   |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> alter table emp add salary int not null;
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc emp;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| id     | int         | NO   | PRI | NULL    |       |
+| name   | varchar(15) | NO   |     | NULL    |       |
+| city   | varchar(15) | NO   |     | NULL    |       |
+| post   | varchar(15) | NO   |     | NULL    |       |
+| email  | varchar(30) | NO   |     | NULL    |       |
+| salary | int         | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> insert into emp values(1,"Tim","Pune","Manager","Tim@gmail.com",90000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(2,"Elen","Banglore","Assistant","Elen@gmail.com",60000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(3,"Nike","Mumbai","Salesperson","Nike@gmail.com",65000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into emp values(4,"Lily","Delhi","Receptionist","Lily@gmail.com",55000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from emp;
++----+------+----------+--------------+----------------+--------+
+| id | name | city     | post         | email          | salary |
++----+------+----------+--------------+----------------+--------+
+|  1 | Tim  | Pune     | Manager      | Tim@gmail.com  |  90000 |
+|  2 | Elen | Banglore | Assistant    | Elen@gmail.com |  60000 |
+|  3 | Nike | Mumbai   | Salesperson  | Nike@gmail.com |  65000 |
+|  4 | Lily | Delhi    | Receptionist | Lily@gmail.com |  55000 |
++----+------+----------+--------------+----------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> create table transaction_log(user_id varchar(15), description varchar(30));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc transaction_log;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| user_id     | varchar(15) | YES  |     | NULL    |       |
+| description | varchar(30) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+2 rows in set (0.01 sec)
+
+mysql> delimiter //
+mysql> create trigger mytrigger
+    -> before delete on emp
+    -> for each row
+    -> begin
+    -> insert into transaction_log
+    -> (user_id, description)
+    -> values(user(),"Employee deleted");
+    -> end //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+mysql> delete from emp where id=2;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from emp;
++----+------+--------+--------------+----------------+--------+
+| id | name | city   | post         | email          | salary |
++----+------+--------+--------------+----------------+--------+
+|  1 | Tim  | Pune   | Manager      | Tim@gmail.com  |  90000 |
+|  3 | Nike | Mumbai | Salesperson  | Nike@gmail.com |  65000 |
+|  4 | Lily | Delhi  | Receptionist | Lily@gmail.com |  55000 |
++----+------+--------+--------------+----------------+--------+
+3 rows in set (0.00 sec)
+
+mysql> select* from transaction_log;
++----------------+------------------+
+| user_id        | description      |
++----------------+------------------+
+| root@localhost | Employee deleted |
++----------------+------------------+
+1 row in set (0.00 sec)
+
+mysql> delete from emp where id=1;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select* from emp;
++----+------+--------+--------------+----------------+--------+
+| id | name | city   | post         | email          | salary |
++----+------+--------+--------------+----------------+--------+
+|  3 | Nike | Mumbai | Salesperson  | Nike@gmail.com |  65000 |
+|  4 | Lily | Delhi  | Receptionist | Lily@gmail.com |  55000 |
++----+------+--------+--------------+----------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> select* from transaction_log;
++----------------+------------------+
+| user_id        | description      |
++----------------+------------------+
+| root@localhost | Employee deleted |
+| root@localhost | Employee deleted |
++----------------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> drop trigger mytrigger;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> create table account(acct_num int,amount decimal(10,2));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create trigger ins_sum before insert on account
+    -> for each row set @sum=@sum
+    -> ^C
+mysql> create trigger ins_sum before insert on account
+    -> for each row set @sum=@sum
+    -> ^C
+mysql> create trigger ins_sum before insert on account
+    -> for each row set @sum=@sum+New.amount;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> set @sum=0;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> insert into account values(137,14.98),(141,1937.50),(97,-100.00);
+Query OK, 3 rows affected (0.01 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select @sum as "Total amount inserted";
++-----------------------+
+| Total amount inserted |
++-----------------------+
+|               1852.48 |
++-----------------------+
+1 row in set (0.00 sec)
+
+mysql> drop trigger ins_sum;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> use office;
+Database changed
+mysql> select * from emp;
++----+------+--------+--------------+----------------+--------+
+| id | name | city   | post         | email          | salary |
++----+------+--------+--------------+----------------+--------+
+|  3 | Nike | Mumbai | Salesperson  | Nike@gmail.com |  65000 |
+|  4 | Lily | Delhi  | Receptionist | Lily@gmail.com |  55000 |
++----+------+--------+--------------+----------------+--------+
+2 rows in set (0.00 sec)
+
+mysql> delimiter //
+mysql> create trigger mytri before update on emp
+    -> for each row
+    -> begin
+    -> if New.salary<5000 then
+    -> set New.salary=30000;
+    -> else
+    -> set New.salary=New.salary+500;
+    -> end if;
+    -> end //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter;
+    -> ^C
+mysql> delimiter ;
+mysql> update emp set salary=40000 where name="Nike";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select* from emp;
++----+------+--------+--------------+----------------+--------+
+| id | name | city   | post         | email          | salary |
++----+------+--------+--------------+----------------+--------+
+|  3 | Nike | Mumbai | Salesperson  | Nike@gmail.com |  40500 |
+|  4 | Lily | Delhi  | Receptionist | Lily@gmail.com |  55000 |
++----+------+--------+--------------+----------------+--------+
+2 rows in set (0.00 sec)
