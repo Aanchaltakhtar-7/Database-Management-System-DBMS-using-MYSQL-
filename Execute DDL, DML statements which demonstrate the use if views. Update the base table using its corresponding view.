@@ -1,7 +1,3 @@
-DBMS Assignment-7
-Name:- Aanchal Takhtar
-SE IT B 56
------------------------------------------------
 
 mysql> create database view;
 Query OK, 1 row affected (0.01 sec)
