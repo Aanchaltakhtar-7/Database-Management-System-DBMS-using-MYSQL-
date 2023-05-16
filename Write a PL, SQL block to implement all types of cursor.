@@ -1,0 +1,118 @@
+mysql> drop database office;
+Query OK, 3 rows affected (0.06 sec)
+
+mysql> create database student_grade;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use student_grade;
+Database changed
+mysql> create table stud(Roll_no int primary key, name varchar(15) not null, sub1 int not null, sub2 int not null, sub3 int not null);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> desc stud;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| Roll_no | int         | NO   | PRI | NULL    |       |
+| name    | varchar(15) | NO   |     | NULL    |       |
+| sub1    | int         | NO   |     | NULL    |       |
+| sub2    | int         | NO   |     | NULL    |       |
+| sub3    | int         | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+mysql> insert into stud values(1,"Liam",90,95,97);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into stud vales(2,"Nayan",75,98,87);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'vales(2,"Nayan",75,98,87)' at line 1
+mysql> insert into stud values(2,"Nayan",75,98,87);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into stud values(3,"Rushi",78,62,72);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into stud values(4,"Jay",44,53,55);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into stud values(5,"Yaji",76,56,85);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select* from stud;
++---------+-------+------+------+------+
+| Roll_no | name  | sub1 | sub2 | sub3 |
++---------+-------+------+------+------+
+|       1 | Liam  |   90 |   95 |   97 |
+|       2 | Nayan |   75 |   98 |   87 |
+|       3 | Rushi |   78 |   62 |   72 |
+|       4 | Jay   |   44 |   53 |   55 |
+|       5 | Yaji  |   76 |   56 |   85 |
++---------+-------+------+------+------+
+5 rows in set (0.00 sec)
+
+mysql> create procedure cal_grade()
+    -> begin
+    -> declare rn,s1,s2,s3,t int;
+    -> declare stu_cursor cursor for select Roll_no,sub1,sub2,sub3 from stud;
+    -> open stu_cursor;
+    -> cursor_stu:loop
+    -> fetch stu_cursor into rn,s1,s2,s3;
+    -> set t=(s1+s2+s3)/3;
+    -> if t>80 then select contact("O: ",t) as "rows";
+    -> end if;
+    -> if t>=75 and t<=80 then select concat("A+: ",t) as "rows";
+    -> end if;
+    -> if t>=71 and t<=74 then select concat("A: ",t) as "rows";
+    -> end if;
+    -> if t>=65 and t<=70 then select concat("B+: ",t) as "rows";
+    -> end if;
+    -> if t>=60 and t<=64 then select concat("B: ",t) as "rows";
+    -> end if;
+    -> if t>=55 and t<=59 then select concat("C+: ",t) as "rows";
+    -> end if;
+    -> if t>=50 and t<=54 then select concat("C: ",t) as "rows";
+    -> end if;
+    -> if t>=35 and t<=40 then select concat("FAIL: ",t) as "rows";
+    -> end if;
+    -> end loop cursor_stu;
+    -> close stu_cursor;
+    -> end //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> delimiter ;
+
+mysql&gt; call cal_grade();
++-------+
+| rows  |
++-------+
+| O: 94 |
++-------+
+1 row in set (0.00 sec)
+
++-------+
+| rows  |
++-------+
+| O: 81 |
++-------+
+1 row in set (0.00 sec)
+
++-------+
+| rows  |
++-------+
+| B: 64 |
++-------+
+1 row in set (0.00 sec)
+
++--------+
+| rows   |
++--------+
+| C+: 55 |
++--------+
+1 row in set (0.00 sec)
+
++----------+
+| rows     |
++----------+
+| FAIL: 35 |
++----------+
+1 row in set (0.01 sec)
